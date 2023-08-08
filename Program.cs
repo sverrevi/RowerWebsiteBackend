@@ -4,6 +4,7 @@ using RowerWebsiteBackend.Services.RowerService;
 using RowerWebsiteBackend.Services.RowingClubService;
 using Microsoft.Extensions.Configuration;
 using IBM.Data.DB2.Core;
+using Microsoft.AspNetCore.Hosting;
 
 namespace RowerWebsiteBackend
 {
@@ -16,11 +17,10 @@ namespace RowerWebsiteBackend
             // Add services to the container.
 
             builder.Services.AddControllers();
-
             builder.Services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(builder.Configuration
             .GetConnectionString("AzureDBConnection")));
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 

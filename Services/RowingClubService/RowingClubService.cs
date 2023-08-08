@@ -14,14 +14,14 @@ namespace RowerWebsiteBackend.Services.RowingClubService
         }
 
 
-        public async Task<List<RowingClub>> AddRowingClub(RowingClub rowingClub)
+        public async Task<ICollection<RowingClub>> AddRowingClub(RowingClub rowingClub)
         {
             _context.RowingClubs.Add(rowingClub);
             await _context.SaveChangesAsync();
             return await _context.RowingClubs.ToListAsync();
         }
 
-        public async Task<List<RowingClub>?> DeleteRowingClub(int id)
+        public async Task<ICollection<RowingClub>?> DeleteRowingClub(int id)
         {
             var rowingClub = await _context.RowingClubs.FindAsync(id);
             if (rowingClub == null)
@@ -33,7 +33,7 @@ namespace RowerWebsiteBackend.Services.RowingClubService
             return await _context.RowingClubs.ToListAsync();
         }
 
-        public async Task<List<RowingClub?>> GetAllRowingClubs()
+        public async Task<ICollection<RowingClub?>> GetAllRowingClubs()
         {
             var rowingClubs = await _context.RowingClubs.ToListAsync();
             return rowingClubs;
@@ -48,7 +48,7 @@ namespace RowerWebsiteBackend.Services.RowingClubService
             return rowingClub;
         }
 
-        public async Task<List<RowingClub>?> UpdateRowingClub(int id, RowingClub request)
+        public async Task<ICollection<RowingClub>?> UpdateRowingClub(int id, RowingClub request)
         {
             var rowingClub = await _context.RowingClubs.FindAsync(id);
             if (rowingClub == null)

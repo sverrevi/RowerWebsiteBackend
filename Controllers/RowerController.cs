@@ -25,13 +25,13 @@ namespace RowerWebsiteBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Rower>>> GetAllRowers()
         {
-            return await _rowerService.GetAllRowers();
+            return Ok(_mapper.Map<List<RowerDTO>>(await _rowerService.GetAllRowers()));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Rower>> GetOneRower(int id)
         {
-            var rower = await _rowerService.GetOneRower(id);
+            var rower = _mapper.Map<RowerDTO>(await _rowerService.GetOneRower(id));
             if (rower == null)
             {
                 return NotFound("This rower does not exist within the database");
@@ -47,10 +47,21 @@ namespace RowerWebsiteBackend.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<List<Rower>>> UpdateRower(int id, Rower request)
+        /*
+        [HttpPut("rowingClub")]
+        public async Task<ActionResult<Rower>> AddRowingClubToRower(AddRowingClubToRowerDTO request)
         {
-            var result =  await _rowerService.UpdateRower(id, request);
+            var rower = await _rowerService.AddRowingClubToRower(request);
+
+        }
+        */
+        
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<List<Rower>>> UpdateRower(int id, RowerDTO rowerDTO)
+        {
+            Rower rower = _mapper.Map<Rower>(rowerDTO);
+            var result =  await _rowerService.UpdateRower(id, rower);
             if (result == null)
                 return NotFound("Rower not found");
 

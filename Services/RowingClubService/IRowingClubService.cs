@@ -4,10 +4,10 @@ namespace RowerWebsiteBackend.Services.RowingClubService
 {
     public interface IRowingClubService
     {
-        Task<List<RowingClub>> GetAllRowingClubs();
+        Task<ICollection<RowingClub>> GetAllRowingClubs();
         Task<RowingClub?> GetSingleRowingClub(int id);
-        Task<List<RowingClub>> AddRowingClub(RowingClub rowingClub);
-        Task<List<RowingClub>?> UpdateRowingClub(int id, RowingClub rowingClub);
-        Task<List<RowingClub>?> DeleteRowingClub(int id);
+        Task<ICollection<RowingClub>> AddRowingClub(RowingClub rowingClub);
+        Task<ICollection<RowingClub>?> UpdateRowingClub(int id, RowingClub rowingClub);
+        Task<ICollection<RowingClub>?> DeleteRowingClub(int id);
     }
 }

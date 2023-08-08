@@ -13,8 +13,6 @@ namespace RowerWebsiteBackend.Data
         {
 
         }
-
-
         public DbSet<Rower> Rowers { get; set; }
         public DbSet<RowingClub> RowingClubs { get; set; }
 

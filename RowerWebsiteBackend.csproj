@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="IBM.Data.DB2.Core" Version="3.1.0.600" />
     <PackageReference Include="IBM.EntityFrameworkCore" Version="7.0.0.200" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />

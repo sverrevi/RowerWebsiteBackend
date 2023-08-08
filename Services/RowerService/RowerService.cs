@@ -1,4 +1,5 @@
 ﻿using RowerWebsiteBackend.Models.Domain;
+using RowerWebsiteBackend.Models.DTOs;
 
 namespace RowerWebsiteBackend.Services.RowerService
 {
@@ -13,14 +14,22 @@ namespace RowerWebsiteBackend.Services.RowerService
             _context = context;
         }
 
-        public async Task<List<Rower>> AddRower(Rower rower)
+        public async Task<ICollection<Rower>> AddRower(Rower rower)
         {
             _context.Rowers.Add(rower);
             await _context.SaveChangesAsync();
             return await _context.Rowers.ToListAsync();
         }
 
-        public async Task<List<Rower>?> DeleteRower(int id)
+        /*
+        public async Task<ICollection<Rower>> AddRowingClubToRower(AddRowingClubToRowerDTO newRowingClub)
+        {
+            var response = new 
+            _context.
+        }
+        */
+
+        public async Task<ICollection<Rower>?> DeleteRower(int id)
         {
             var rower = await _context.Rowers.FindAsync(id);
             if (rower == null)
@@ -32,7 +41,7 @@ namespace RowerWebsiteBackend.Services.RowerService
             return await _context.Rowers.ToListAsync();
         }
 
-        public async Task<List<Rower>> GetAllRowers()
+        public async Task<ICollection<Rower>> GetAllRowers()
         {
             var rowers = await _context.Rowers.ToListAsync();
             return rowers;
@@ -47,7 +56,7 @@ namespace RowerWebsiteBackend.Services.RowerService
             return rower;
         }
 
-        public async Task<List<Rower>?> UpdateRower(int id, Rower request)
+        public async Task<ICollection<Rower>?> UpdateRower(int id, Rower request)
         {
             var rower = await _context.Rowers.FindAsync(id);
             if (rower == null)
