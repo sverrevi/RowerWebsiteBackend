@@ -89,9 +89,9 @@ namespace RowerWebsiteBackend.Services.RowerService
 
             rower.FirstName = request.FirstName;
             rower.LastName = request.LastName;
+            rower.Gender= request.Gender;
             rower.Weight = request.Weight;
             rower.Height = request.Height;
-            rower.RowingClub = request.RowingClub;
             rower.RowingClubs = request.RowingClubs;
 
             await _context.SaveChangesAsync();

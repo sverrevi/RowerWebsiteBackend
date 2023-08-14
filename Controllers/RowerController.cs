@@ -40,7 +40,7 @@ namespace RowerWebsiteBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Rower>>> AddRower(RowerDTO rowerDTO)
+        public async Task<ActionResult<List<Rower>>> AddRower([FromBody] RowerDTO rowerDTO)
         {
             Rower rower = _mapper.Map<Rower>(rowerDTO);
             var result = await _rowerService.AddRower(rower);

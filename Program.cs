@@ -23,8 +23,6 @@ namespace RowerWebsiteBackend
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
-
-
             //For local database
             /*
             builder.Services.AddDbContext<DataContext>(options =>
@@ -51,6 +49,10 @@ namespace RowerWebsiteBackend
             builder.Services.AddScoped<IRowerService, RowerService>();
             builder.Services.AddScoped<IRowingClubService, RowingClubService>();
             builder.Services.AddDbContext<DataContext>();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

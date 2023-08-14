@@ -38,6 +38,10 @@ namespace RowerWebsiteBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<List<RowingClub>>> AddRowingClub(RowingClubDTO rowingClubDTO)
         {
+            if (await _rowingClubService.RowingClubExists(rowingClubDTO.ClubName))
+            {
+                return BadRequest("A rowing club with this name already exists.");
+            }
             RowingClub rowingClub = _mapper.Map<RowingClub>(rowingClubDTO);
             var result = await _rowingClubService.AddRowingClub(rowingClub);
             return Ok(result);

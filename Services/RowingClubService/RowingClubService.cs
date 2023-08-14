@@ -1,4 +1,5 @@
 ﻿using RowerWebsiteBackend.Models.Domain;
+using RowerWebsiteBackend.Models.DTOs;
 
 namespace RowerWebsiteBackend.Services.RowingClubService
 {
@@ -11,6 +12,13 @@ namespace RowerWebsiteBackend.Services.RowingClubService
         public RowingClubService(DataContext context)
         {
             _context = context;
+        }
+
+
+        public async Task<bool> RowingClubExists(string clubName)
+        {
+            // Implement the database query to check if a rowing club with the given name exists
+            return await _context.RowingClubs.AnyAsync(rc => rc.ClubName == clubName);
         }
 
 

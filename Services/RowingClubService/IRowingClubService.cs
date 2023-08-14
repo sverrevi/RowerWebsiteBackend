@@ -7,6 +7,7 @@ namespace RowerWebsiteBackend.Services.RowingClubService
         Task<ICollection<RowingClub>> GetAllRowingClubs();
         Task<RowingClub?> GetSingleRowingClub(int id);
         Task<ICollection<RowingClub>> AddRowingClub(RowingClub rowingClub);
+        Task<bool> RowingClubExists(string clubName);
         Task<ICollection<RowingClub>?> UpdateRowingClub(int id, RowingClub rowingClub);
         Task<ICollection<RowingClub>?> DeleteRowingClub(int id);
     }
