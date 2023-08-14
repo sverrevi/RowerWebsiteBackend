@@ -1,5 +1,7 @@
-﻿using RowerWebsiteBackend.Models.Domain;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using RowerWebsiteBackend.Models.Domain;
 using RowerWebsiteBackend.Models.DTOs;
+using System.Data;
 
 namespace RowerWebsiteBackend.Services.RowerService
 {
@@ -21,13 +23,36 @@ namespace RowerWebsiteBackend.Services.RowerService
             return await _context.Rowers.ToListAsync();
         }
 
-        /*
-        public async Task<ICollection<Rower>> AddRowingClubToRower(AddRowingClubToRowerDTO newRowingClub)
+        
+        public async Task<Rower> UpdateRowingClubsForRower(int id, List<int> rowingClubs)
         {
-            var response = new 
-            _context.
+            Rower rowerToUpdate = await _context.Rowers
+                .Include(c => c.RowingClubs)
+                .Where(c => c.Id == id)
+                .FirstAsync();
+
+            List<RowingClub> clubs = new();
+            foreach (int rowingClubId in rowingClubs)
+            {
+                RowingClub? club = await _context.RowingClubs.FindAsync(rowingClubId);
+                if (club == null)
+                    return null;
+                clubs.Add(club);
+            }
+
+            rowerToUpdate.RowingClubs = clubs;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return rowerToUpdate;
+            }
+            catch(DbUpdateConcurrencyException) 
+            {
+                throw;
+            }
         }
-        */
+        
 
         public async Task<ICollection<Rower>?> DeleteRower(int id)
         {
@@ -43,7 +68,7 @@ namespace RowerWebsiteBackend.Services.RowerService
 
         public async Task<ICollection<Rower>> GetAllRowers()
         {
-            var rowers = await _context.Rowers.ToListAsync();
+            var rowers = await _context.Rowers.Include(c => c.RowingClubs).ToListAsync();
             return rowers;
         }
 

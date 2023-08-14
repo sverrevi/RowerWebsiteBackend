@@ -33,7 +33,7 @@ namespace RowerWebsiteBackend.Services.RowingClubService
             return await _context.RowingClubs.ToListAsync();
         }
 
-        public async Task<ICollection<RowingClub?>> GetAllRowingClubs()
+        public async Task<ICollection<RowingClub>> GetAllRowingClubs()
         {
             var rowingClubs = await _context.RowingClubs.ToListAsync();
             return rowingClubs;

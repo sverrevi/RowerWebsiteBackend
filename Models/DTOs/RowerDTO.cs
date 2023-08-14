@@ -8,5 +8,6 @@ namespace RowerWebsiteBackend.Models.DTOs
         public string LastName { get; set; } = string.Empty;
         public double Height { get; set; } = 0;
         public double Weight { get; set; } = 0;
+        public ICollection<RowingClubDTO>? RowingClubs { get; set; }
     }
 }

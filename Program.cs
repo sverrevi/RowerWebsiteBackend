@@ -3,8 +3,8 @@ global using RowerWebsiteBackend.Data;
 using RowerWebsiteBackend.Services.RowerService;
 using RowerWebsiteBackend.Services.RowingClubService;
 using Microsoft.Extensions.Configuration;
-using IBM.Data.DB2.Core;
 using Microsoft.AspNetCore.Hosting;
+using System.Text.Json.Serialization;
 
 namespace RowerWebsiteBackend
 {
@@ -38,6 +38,11 @@ namespace RowerWebsiteBackend
             options.UseSqlServer(builder.Configuration
             .GetConnectionString("AzureDBConnection")));
             */
+
+            //Avoid object cycles
+            builder.Services.AddControllersWithViews()
+            .AddJsonOptions(options => options.JsonSerializerOptions
+            .ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -23,7 +23,7 @@ namespace RowerWebsiteBackend.Controllers
 
         
         [HttpGet]
-        public async Task<ActionResult<List<Rower>>> GetAllRowers()
+        public async Task<ActionResult<List<RowerDTO>>> GetAllRowers()
         {
             return Ok(_mapper.Map<List<RowerDTO>>(await _rowerService.GetAllRowers()));
         }
@@ -47,14 +47,28 @@ namespace RowerWebsiteBackend.Controllers
             return Ok(result);
         }
 
-        /*
-        [HttpPut("rowingClub")]
-        public async Task<ActionResult<Rower>> AddRowingClubToRower(AddRowingClubToRowerDTO request)
+
+        [HttpPut("{id}/update-rowing-clubs-on-rower")]
+        public async Task<IActionResult> UpdateRowingClubsForRower(int id, [FromBody] List<int> rowingClubIds)
         {
-            var rower = await _rowerService.AddRowingClubToRower(request);
+            if (rowingClubIds == null || rowingClubIds.Count == 0)
+                return BadRequest("List of rowing club IDs must be provided.");
+            try
+            {
+                Rower updatedRower = await _rowerService.UpdateRowingClubsForRower(id, rowingClubIds);
+                if (updatedRower == null)
+                    return BadRequest("One or more rowing club IDs are invalid.");
+
+                return Ok(updatedRower);
+            }
+
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error.");
+            }
 
         }
-        */
+        
         
 
         [HttpPut("{id}")]
