@@ -17,7 +17,6 @@ namespace RowerWebsiteBackend.Services.RowingClubService
 
         public async Task<bool> RowingClubExists(string clubName)
         {
-            // Implement the database query to check if a rowing club with the given name exists
             return await _context.RowingClubs.AnyAsync(rc => rc.ClubName == clubName);
         }
 
