@@ -9,7 +9,5 @@
 
         //Relationship n:n
         public ICollection<Rower?>? Members { get; set; }
-
-
     }
 }

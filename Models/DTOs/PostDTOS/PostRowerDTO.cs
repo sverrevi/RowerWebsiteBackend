@@ -1,9 +1,8 @@
-﻿using RowerWebsiteBackend.Models.Domain;
-using RowerWebsiteBackend.Models.Enums;
+﻿using RowerWebsiteBackend.Models.Enums;
 
-namespace RowerWebsiteBackend.Models.DTOs
+namespace RowerWebsiteBackend.Models.DTOs.PostDTOS
 {
-    public class RowerDTO
+    public class PostRowerDTO
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
@@ -11,6 +10,6 @@ namespace RowerWebsiteBackend.Models.DTOs
         public double Height { get; set; } = 0;
         public double Weight { get; set; } = 0;
 
-        public ICollection<RowingClubDTO>? RowingClubs { get; set; }
+        public ICollection<ExistingRowingClubToRowerDTO>? RowingClubs { get; set; }
     }
 }

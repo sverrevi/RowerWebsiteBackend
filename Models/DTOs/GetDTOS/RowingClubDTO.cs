@@ -1,6 +1,6 @@
 ﻿using RowerWebsiteBackend.Models.Domain;
 
-namespace RowerWebsiteBackend.Models.DTOs
+namespace RowerWebsiteBackend.Models.DTOs.GetDTOS
 {
     public class RowingClubDTO
     {

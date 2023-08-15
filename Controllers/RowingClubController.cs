@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RowerWebsiteBackend.Models.Domain;
-using RowerWebsiteBackend.Models.DTOs;
+using RowerWebsiteBackend.Models.DTOs.GetDTOS;
 using RowerWebsiteBackend.Services.RowerService;
 using RowerWebsiteBackend.Services.RowingClubService;
 

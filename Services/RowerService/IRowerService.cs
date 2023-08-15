@@ -7,7 +7,7 @@ namespace RowerWebsiteBackend.Services.RowerService
     {
         Task<ICollection<Rower>> GetAllRowers();
         Task<Rower?> GetOneRower(int id);
-        Task<ICollection<Rower>> AddRower(Rower rower);
+        Task<Rower> AddRower(Rower rower);
         Task<ICollection<Rower>?> UpdateRower(int id, Rower rower);
         Task<ICollection<Rower>?> DeleteRower(int id);
         Task<Rower> UpdateRowingClubsForRower(int id, List<int> rowingClubs);

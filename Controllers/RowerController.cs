@@ -2,8 +2,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RowerWebsiteBackend.Models.Domain;
-using RowerWebsiteBackend.Models.DTOs;
 using RowerWebsiteBackend.Services.RowerService;
+using RowerWebsiteBackend.Models.DTOs.PostDTOS;
+using RowerWebsiteBackend.Models.DTOs.GetDTOS;
 
 namespace RowerWebsiteBackend.Controllers
 {
@@ -40,10 +41,14 @@ namespace RowerWebsiteBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Rower>>> AddRower([FromBody] RowerDTO rowerDTO)
+        public async Task<ActionResult<Rower>> AddRower([FromBody] PostRowerDTO postRowerDTO)
         {
-            Rower rower = _mapper.Map<Rower>(rowerDTO);
+            Rower rower = _mapper.Map<Rower>(postRowerDTO);
             var result = await _rowerService.AddRower(rower);
+            if (result == null)
+            {
+                return BadRequest("Request could not be met. Make sure you don't add a non-existing rowing club to the rower");
+            }
             return Ok(result);
         }
 

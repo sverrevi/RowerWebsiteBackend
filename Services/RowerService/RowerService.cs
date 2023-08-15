@@ -16,11 +16,28 @@ namespace RowerWebsiteBackend.Services.RowerService
             _context = context;
         }
 
-        public async Task<ICollection<Rower>> AddRower(Rower rower)
+        public async Task<Rower> AddRower(Rower rower)
         {
+            foreach (var rowingClub in rower.RowingClubs)
+            {
+                var existingRowingClub = await _context.RowingClubs.FirstOrDefaultAsync(rc => rc.ClubName == rowingClub.ClubName);
+
+                if (existingRowingClub == null)
+                {
+                    // Rowing club doesn't exist, return without adding the rower
+                    return null;
+                }
+
+            }
+
+            rower.RowingClubs = rower.RowingClubs
+            .Select(rc => _context.RowingClubs.Local
+            .FirstOrDefault(existingClub => existingClub.ClubName == rc.ClubName))
+            .ToList();
+
             _context.Rowers.Add(rower);
             await _context.SaveChangesAsync();
-            return await _context.Rowers.ToListAsync();
+            return rower;
         }
 
         
