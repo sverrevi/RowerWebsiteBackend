@@ -91,7 +91,10 @@ namespace RowerWebsiteBackend.Services.RowerService
 
         public async Task<Rower?> GetOneRower(int id)
         {
-            var rower = await _context.Rowers.FindAsync(id);
+            var rower = await _context.Rowers
+                .Include(c => c.RowingClubs)
+                .Where(c => c.Id == id)
+                .FirstAsync();
             if (rower == null)
                 return null;
 

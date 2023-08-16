@@ -42,13 +42,17 @@ namespace RowerWebsiteBackend.Services.RowingClubService
 
         public async Task<ICollection<RowingClub>> GetAllRowingClubs()
         {
+
             var rowingClubs = await _context.RowingClubs.ToListAsync();
             return rowingClubs;
         }
 
         public async Task<RowingClub?> GetSingleRowingClub(int id)
         {
-            var rowingClub = await _context.RowingClubs.FindAsync(id);
+            var rowingClub = await _context.RowingClubs
+                .Include(c => c.Members)
+                .Where(c => c.Id == id)
+                .FirstAsync();
             if (rowingClub == null)
                 return null;
 
