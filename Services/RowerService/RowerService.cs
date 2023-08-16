@@ -98,22 +98,35 @@ namespace RowerWebsiteBackend.Services.RowerService
             return rower;
         }
 
-        public async Task<ICollection<Rower>?> UpdateRower(int id, Rower request)
+        public async Task<Rower>? UpdateRower(int id, Rower request)
         {
-            var rower = await _context.Rowers.FindAsync(id);
-            if (rower == null)
+
+            Rower rowerToUpdate = await _context.Rowers
+                .Include(c => c.RowingClubs)
+                .Where(c => c.Id == id)
+                .FirstAsync();
+
+            if (rowerToUpdate == null)
                 return null;
 
-            rower.FirstName = request.FirstName;
-            rower.LastName = request.LastName;
-            rower.Gender= request.Gender;
-            rower.Weight = request.Weight;
-            rower.Height = request.Height;
-            rower.RowingClubs = request.RowingClubs;
+            List<RowingClub> clubs = new();
+            foreach (RowingClub rowingClub in rowerToUpdate.RowingClubs)
+            {
+                RowingClub? club = await _context.RowingClubs.FindAsync(rowingClub.Id);
+                if (club == null)
+                    return null;
+                clubs.Add(club);
+            }
+            rowerToUpdate.FirstName = request.FirstName;
+            rowerToUpdate.LastName = request.LastName;
+            rowerToUpdate.Gender= request.Gender;
+            rowerToUpdate.Weight = request.Weight;
+            rowerToUpdate.Height = request.Height;
+            rowerToUpdate.RowingClubs = clubs;
 
             await _context.SaveChangesAsync();
 
-            return await _context.Rowers.ToListAsync();
+            return rowerToUpdate;
         }
     }
 }

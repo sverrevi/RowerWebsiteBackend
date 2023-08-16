@@ -47,7 +47,7 @@ namespace RowerWebsiteBackend.Controllers
             return Ok(result);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<RowingClub>>> UpdateRower(int id, RowingClubDTO rowingClubDTO)
+        public async Task<ActionResult<List<RowingClub>>> UpdateRowingClub(int id, RowingClubDTO rowingClubDTO)
         {
             RowingClub rowingClub = _mapper.Map<RowingClub>(rowingClubDTO);
             var result = await _rowingClubService.UpdateRowingClub(id, rowingClub);

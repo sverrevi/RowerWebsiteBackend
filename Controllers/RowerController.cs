@@ -77,7 +77,7 @@ namespace RowerWebsiteBackend.Controllers
         
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Rower>>> UpdateRower(int id, RowerDTO rowerDTO)
+        public async Task<ActionResult<Rower>?> UpdateRower(int id, RowerDTO rowerDTO)
         {
             Rower rower = _mapper.Map<Rower>(rowerDTO);
             var result =  await _rowerService.UpdateRower(id, rower);
