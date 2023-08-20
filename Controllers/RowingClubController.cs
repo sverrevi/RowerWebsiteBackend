@@ -22,7 +22,7 @@ namespace RowerWebsiteBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<RowingClub>>> GetAllRowingClubs()
         {
-            return Ok(_mapper.Map<List<RowingClubDTO>>(await _rowingClubService.GetAllRowingClubs()));
+            return Ok(_mapper.Map<List<GetAllRowingClubsDTO>>(await _rowingClubService.GetAllRowingClubs()));
         }
 
         [HttpGet("{id}")]

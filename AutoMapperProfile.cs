@@ -21,6 +21,10 @@ namespace RowerWebsiteBackend
             CreateMap<RowingClub, ExistingRowingClubToRowerDTO>();
             CreateMap<ExistingRowingClubToRowerDTO, RowingClub>();
 
+            //Maping between
+            CreateMap<GetAllRowingClubsDTO,RowingClub>();
+            CreateMap<RowingClub, GetAllRowingClubsDTO>();
+
 
         }
     }

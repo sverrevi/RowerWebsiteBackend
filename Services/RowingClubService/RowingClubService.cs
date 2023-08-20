@@ -1,5 +1,6 @@
 ﻿using RowerWebsiteBackend.Models.Domain;
 using RowerWebsiteBackend.Models.DTOs;
+using RowerWebsiteBackend.Models.DTOs.GetDTOS;
 
 namespace RowerWebsiteBackend.Services.RowingClubService
 {
@@ -40,11 +41,21 @@ namespace RowerWebsiteBackend.Services.RowingClubService
             return await _context.RowingClubs.ToListAsync();
         }
 
-        public async Task<ICollection<RowingClub>> GetAllRowingClubs()
+        public async Task<ICollection<GetAllRowingClubsDTO>> GetAllRowingClubs()
         {
+            var rowingClubs = await _context.RowingClubs
+            .Include(rc => rc.Members)
+            .ToListAsync();
 
-            var rowingClubs = await _context.RowingClubs.ToListAsync();
-            return rowingClubs;
+            var dtoList = rowingClubs.Select(rc => new GetAllRowingClubsDTO
+            {
+                ClubName = rc.ClubName,
+                ClubLocation = rc.ClubLocation,
+                ClubWebsiteURL = rc.ClubWebsiteURL,
+                MemberCount = rc.Members.Count()
+            }).ToList();
+
+            return dtoList;
         }
 
         public async Task<RowingClub?> GetSingleRowingClub(int id)

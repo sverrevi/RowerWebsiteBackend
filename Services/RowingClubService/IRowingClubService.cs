@@ -1,10 +1,11 @@
 ﻿using RowerWebsiteBackend.Models.Domain;
+using RowerWebsiteBackend.Models.DTOs.GetDTOS;
 
 namespace RowerWebsiteBackend.Services.RowingClubService
 {
     public interface IRowingClubService
     {
-        Task<ICollection<RowingClub>> GetAllRowingClubs();
+        Task<ICollection<GetAllRowingClubsDTO>> GetAllRowingClubs();
         Task<RowingClub?> GetSingleRowingClub(int id);
         Task<ICollection<RowingClub>> AddRowingClub(RowingClub rowingClub);
         Task<bool> RowingClubExists(string clubName);
