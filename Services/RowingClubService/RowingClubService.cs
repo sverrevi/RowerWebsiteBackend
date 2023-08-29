@@ -20,8 +20,6 @@ namespace RowerWebsiteBackend.Services.RowingClubService
         {
             return await _context.RowingClubs.AnyAsync(rc => rc.ClubName == clubName);
         }
-
-
         public async Task<ICollection<RowingClub>> AddRowingClub(RowingClub rowingClub)
         {
             _context.RowingClubs.Add(rowingClub);
