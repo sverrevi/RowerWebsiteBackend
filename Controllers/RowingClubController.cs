@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+//using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using RowerWebsiteBackend.Models.Domain;
 using RowerWebsiteBackend.Models.DTOs.GetDTOS;
 using RowerWebsiteBackend.Services.RowerService;
 using RowerWebsiteBackend.Services.RowingClubService;
+using System.Web.Http.Cors;
 
 namespace RowerWebsiteBackend.Controllers
 {
+    [EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     [ApiController]
     public class RowingClubController : ControllerBase

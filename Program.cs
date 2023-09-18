@@ -42,6 +42,20 @@ namespace RowerWebsiteBackend
             .AddJsonOptions(options => options.JsonSerializerOptions
             .ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+            //CORS-settings in development
+            var allowedOriginsPolicy = "_allowedOriginsPolicy";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: allowedOriginsPolicy,
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173/")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+            
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -61,8 +75,11 @@ namespace RowerWebsiteBackend
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
+            app.UseCors(options =>
+            {
+                options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            });
 
             app.UseAuthorization();
 
