@@ -12,6 +12,5 @@ namespace RowerWebsiteBackend.Services.RowerService
         Task<ICollection<Rower>?> DeleteRower(int id);
         Task<Rower> UpdateRowingClubsForRower(int id, List<int> rowingClubs);
 
-
     }
 }

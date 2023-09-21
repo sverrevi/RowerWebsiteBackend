@@ -10,6 +10,7 @@ namespace RowerWebsiteBackend.Models.DTOs.GetDTOS
         public Gender Gender { get; set; }
         public double Height { get; set; } = 0;
         public double Weight { get; set; } = 0;
+        public string? PhotoFileName { get; set; }
 
         public ICollection<RowingClubDTO>? RowingClubs { get; set; }
     }

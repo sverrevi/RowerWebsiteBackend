@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using RowerWebsiteBackend.Models.Domain;
 using RowerWebsiteBackend.Models.DTOs;
 using System.Data;
@@ -131,5 +133,14 @@ namespace RowerWebsiteBackend.Services.RowerService
 
             return rowerToUpdate;
         }
+        /*
+        public async Task<IActionResult> PutImageOnRower(string name, int id)
+        {
+            var containerInstance = _blobServiceClient.GetBlobContainerClient("rowerphotos");
+            var bloblInstance = containerInstance.GetBlobClient(name);
+            var downloadContent = await bloblInstance.DownloadAsync();
+            return downloadContent.Value.Content;
+        }
+        */
     }
 }

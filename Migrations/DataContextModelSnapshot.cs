@@ -58,6 +58,10 @@ namespace RowerWebsiteBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhotoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 

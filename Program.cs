@@ -5,6 +5,13 @@ using RowerWebsiteBackend.Services.RowingClubService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using System.Text.Json.Serialization;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using System;
+using System.IO;
+using Microsoft.Extensions.Azure;
+using Azure.Identity;
+using RowerWebsiteBackend.Services;
 
 namespace RowerWebsiteBackend
 {
@@ -55,7 +62,19 @@ namespace RowerWebsiteBackend
                                .AllowAnyMethod();
                     });
             });
+            builder.Services.AddScoped(_ =>
+            {
+                return new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobStorage"));
+            });
+            builder.Services.AddScoped<IFileService, FileService>();
             
+            /*
+            builder.Services.AddAzureClients(x =>
+            {
+                x.AddBlobServiceClient(new Uri("https://photohost1000.blob.core.windows.net/rowerphotos"));
+                x.UseCredential(new DefaultAzureCredential());
+            });
+            */
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
