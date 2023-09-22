@@ -25,5 +25,23 @@ namespace RowerWebsiteBackend.Controllers
             }
             return File(imageFileStream, $"image/{fileType}");
         }
+        [HttpPost("upload/{id}")]
+        public async Task<IActionResult> UploadImage(int id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file.");
+            }
+
+            var result = await _fileService.UploadImage(file, id);
+
+            if (result == null)
+            {
+                return NotFound($"Rower with ID {id} not found.");
+            }
+
+            return Ok("Image uploaded successfully.");
+        }
+
     }
 }

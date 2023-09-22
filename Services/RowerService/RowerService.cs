@@ -132,15 +132,6 @@ namespace RowerWebsiteBackend.Services.RowerService
             await _context.SaveChangesAsync();
 
             return rowerToUpdate;
-        }
-        /*
-        public async Task<IActionResult> PutImageOnRower(string name, int id)
-        {
-            var containerInstance = _blobServiceClient.GetBlobContainerClient("rowerphotos");
-            var bloblInstance = containerInstance.GetBlobClient(name);
-            var downloadContent = await bloblInstance.DownloadAsync();
-            return downloadContent.Value.Content;
-        }
-        */
+        }        
     }
 }
