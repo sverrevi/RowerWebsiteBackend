@@ -128,6 +128,7 @@ namespace RowerWebsiteBackend.Services.RowerService
             rowerToUpdate.Weight = request.Weight;
             rowerToUpdate.Height = request.Height;
             rowerToUpdate.RowingClubs = clubs;
+            rowerToUpdate.PhotoFileName = request.PhotoFileName;
 
             await _context.SaveChangesAsync();
 
