@@ -61,10 +61,6 @@ namespace RowerWebsiteBackend.Migrations
                     b.Property<string>("PhotoFileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
@@ -82,6 +78,9 @@ namespace RowerWebsiteBackend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClubLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClubLogoFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClubName")

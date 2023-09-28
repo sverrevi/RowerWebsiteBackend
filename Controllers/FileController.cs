@@ -42,6 +42,24 @@ namespace RowerWebsiteBackend.Controllers
 
             return Ok("Image uploaded successfully.");
         }
+        
+        [HttpPost("uploadLogo/{id}")]
+        public async Task<IActionResult> UploadRowingClubLogo(int id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("Invalid file.");
+            }
 
+            var result = await _fileService.UploadRowingClubLogo(file, id);
+
+            if (result == null)
+            {
+                return NotFound($"RowingClub with ID {id} not found.");
+            }
+
+            return Ok("Image uploaded successfully.");
+        }
+        
     }
 }

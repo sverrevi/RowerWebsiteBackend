@@ -11,8 +11,8 @@ using RowerWebsiteBackend.Data;
 namespace RowerWebsiteBackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230921083230_AddPhotoUrlToRower")]
-    partial class AddPhotoUrlToRower
+    [Migration("20230928131318_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,8 +61,7 @@ namespace RowerWebsiteBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhotoUrl")
-                        .IsRequired()
+                    b.Property<string>("PhotoFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Weight")
@@ -82,6 +81,9 @@ namespace RowerWebsiteBackend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClubLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClubLogoFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClubName")

@@ -10,7 +10,6 @@ namespace RowerWebsiteBackend.Models.Domain
         public Gender Gender { get; set; }
         public double Height { get; set; } = 0;
         public double Weight { get; set; } = 0;
-        public string PhotoUrl { get; set; } = "default-photo-url.jpg";
         public string? PhotoFileName { get; set; }
 
         //Relationship n:n

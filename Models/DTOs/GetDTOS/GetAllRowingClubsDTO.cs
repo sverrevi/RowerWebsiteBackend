@@ -8,5 +8,6 @@ namespace RowerWebsiteBackend.Models.DTOs.GetDTOS
         public string? ClubLocation { get; set; }
         public string? ClubWebsiteURL { get; set; }
         public int? MemberCount { get; set; }
+        public string? ClubLogoFileName { get; set; }
     }
 }

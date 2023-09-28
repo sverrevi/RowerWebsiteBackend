@@ -39,6 +39,35 @@ namespace RowerWebsiteBackend.Services
 
             return fileName;
         }
+        
+        public async Task<string?> UploadRowingClubLogo(IFormFile formFile, int rowingClubId)
+        {
+            var rowingClubToApplyLogoTo = await _context.RowingClubs
+                .FirstOrDefaultAsync(r => r.Id == rowingClubId);
+
+            if (rowingClubToApplyLogoTo == null)
+            {
+                return null;
+            }
+
+            string fileName = $"{rowingClubToApplyLogoTo.ClubName}Logo_{DateTime.Now.Ticks}.jpg";
+
+            var containerClient = _blobServiceClient.GetBlobContainerClient("rowerphotos");
+            var blobClient = containerClient.GetBlobClient(fileName);
+
+            using (var stream = formFile.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream, true);
+            }
+
+            rowingClubToApplyLogoTo.ClubLogoFileName = fileName;
+            await _context.SaveChangesAsync();
+
+            return fileName;
+        }
+        
+
+
 
         public async Task<Stream> GetImage(string name)
         {

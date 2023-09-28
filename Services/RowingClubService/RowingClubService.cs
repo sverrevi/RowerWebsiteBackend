@@ -50,7 +50,8 @@ namespace RowerWebsiteBackend.Services.RowingClubService
                 ClubName = rc.ClubName,
                 ClubLocation = rc.ClubLocation,
                 ClubWebsiteURL = rc.ClubWebsiteURL,
-                MemberCount = rc.Members.Count()
+                MemberCount = rc.Members.Count(),
+                ClubLogoFileName = rc.ClubLogoFileName,
             }).ToList();
 
             return dtoList;
