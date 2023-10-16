@@ -34,7 +34,7 @@ namespace RowerWebsiteBackend.Controllers
             var rowingClub = _mapper.Map<RowingClub>(await _rowingClubService.GetSingleRowingClub(id));
             if (rowingClub == null)
             {
-                return NotFound("This rowing club does not exist within the database");
+                return NotFound($"Rowing club with id {id} does not exist within the database.");
             }
             return Ok(rowingClub);
         }

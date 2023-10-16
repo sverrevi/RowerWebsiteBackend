@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.Extensions.Azure;
 using Azure.Identity;
 using RowerWebsiteBackend.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace RowerWebsiteBackend
 {
@@ -28,6 +29,10 @@ namespace RowerWebsiteBackend
             options.UseSqlServer(builder.Configuration
             .GetConnectionString("AzureDBConnection")));
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+            builder.Services.AddAuthorization();
+
+
 
 
             //For local database

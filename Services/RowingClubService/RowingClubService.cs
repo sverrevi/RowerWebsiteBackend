@@ -61,8 +61,7 @@ namespace RowerWebsiteBackend.Services.RowingClubService
         {
             var rowingClub = await _context.RowingClubs
                 .Include(c => c.Members)
-                .Where(c => c.Id == id)
-                .FirstAsync();
+                .FirstOrDefaultAsync(c => c.Id == id);
             if (rowingClub == null)
                 return null;
 
