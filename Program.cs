@@ -1,5 +1,6 @@
 global using RowerWebsiteBackend.Models;
 global using RowerWebsiteBackend.Data;
+global using RowerWebsiteBackend.Services;
 using RowerWebsiteBackend.Services.RowerService;
 using RowerWebsiteBackend.Services.RowingClubService;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,11 @@ using Microsoft.Extensions.Azure;
 using Azure.Identity;
 using RowerWebsiteBackend.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace RowerWebsiteBackend
 {
@@ -31,6 +37,20 @@ namespace RowerWebsiteBackend
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             builder.Services.AddAuthorization();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+            };
+            });
+
+            builder.Services.AddHttpContextAccessor();
 
 
 
@@ -83,9 +103,21 @@ namespace RowerWebsiteBackend
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
             builder.Services.AddScoped<IRowerService, RowerService>();
             builder.Services.AddScoped<IRowingClubService, RowingClubService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddDbContext<DataContext>();
             builder.Services.AddControllers().AddJsonOptions(options =>
             {
@@ -105,7 +137,9 @@ namespace RowerWebsiteBackend
                 options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
             });
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
 
             app.MapControllers();

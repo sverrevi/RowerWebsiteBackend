@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RowerWebsiteBackend.Models.Domain;
 using RowerWebsiteBackend.Models.DTOs.PostDTOS;
+using RowerWebsiteBackend.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -15,11 +17,20 @@ namespace RowerWebsiteBackend.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly DataContext _dbContext;
+        private readonly IUserService _userService;
 
-        public AuthController(IConfiguration configuration, DataContext dbContext)
+        public AuthController(IConfiguration configuration, DataContext dbContext, IUserService userService)
         {
             _configuration = configuration;
             _dbContext = dbContext;
+            _userService = userService;
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult<String> GetMe()
+        {
+            var UserName = _userService.GetMyName();
+            return Ok(UserName);
         }
 
         [HttpPost("Register")]
