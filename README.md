@@ -7,7 +7,7 @@ The endpoints generated are tested using [Swagger UI](https://swagger.io/tools/s
 
 ## Note
 The website, as of 11.30.23, does not have a server. The server was deleted as the website is no longer being developed. The website will possibly be deployed using a new server later, but as of now, the website is not functioning. A demonstration of the website from when the website had a server can be found with the following youtube links:
-https://youtu.be/5b3poCSqPfQ_
-https://youtu.be/X18MxMAUBzw_
+https://youtu.be/5b3poCSqPfQ__
+https://youtu.be/X18MxMAUBzw__
 
 These are private videoes, but can be gained access to if requested to sverrevinje@gmail.com.
