@@ -10,5 +10,6 @@ The website, as of 11.30.23, does not have a server. The server was deleted as t
 
 A demonstration of the website from when the website had a server can be found with the following YouTube links:  
 * https://youtu.be/5b3poCSqPfQ  
-* https://youtu.be/X18MxMAUBzw  
-These are private videoes, but can be gained access to if requested to sverrevinje@gmail.com.
+* https://youtu.be/X18MxMAUBzw
+
+These videoes are private, but access can be gained by emailing sverrevinje@gmail.com
